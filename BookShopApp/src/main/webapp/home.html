@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Book Store</title>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+</head>
+
+<body class="container-fluid card" style="width: 40rem;">
+	<h2 class="bg-danger text-white text-center">Book Registration</h2>
+
+	<form action="register" method="post">
+		<table class="table table-hover">
+			<tr>
+				<td>Book Name</td>
+				<td>
+					<input type="text" name="bookName" />
+				</td>
+			</tr>
+
+			<tr>
+				<td>Book Edition</td>
+				<td>
+					<input type="text" name="bookEdition" />
+				</td>
+			</tr>
+
+			<tr>
+				<td>Book Price</td>
+				<td>
+					<input type="text" name="bookPrice" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<input class="btn btn-primary" type="submit" value="Register"/>
+				</td>
+				<td>
+					<input class="btn btn-warning" type="reset" value="Cancel" />
+				</td>
+				<td>
+					<a href="booklist">Book List</a>	
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+
+</html>
