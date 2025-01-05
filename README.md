@@ -2,7 +2,7 @@
 
 ## 📚 Project Overview
 
-The **BookShop App** is a web-based application built using **Servlets**, **JSP (Java Server Pages)**, and **JDBC (Java Database Connectivity)**. It is designed for small to medium-sized bookshops to streamline inventory management, improve efficiency, and provide an organized system for handling book records. This project allows users to manage book records efficiently with the ability to **Add**, **View**, **Edit**, and **Delete** book details through a user-friendly interface.
+The **BookShop App** is a web-based application built using **Servlets**, **JSP (Java Server Pages)**, and **JDBC (Java Database Connectivity)**.This project allows users to manage book records efficiently with the ability to **Add**, **View**, **Edit**, and **Delete** book details through a user-friendly interface.
 
 ## 🚀 Features
 
@@ -18,9 +18,10 @@ The **BookShop App** is a web-based application built using **Servlets**, **JSP 
 - **Database:** MySQL  
 - **Connectivity:** JDBC  
 - **Server:** Apache Tomcat  
-
+   
 ## 🏗️ Project Structure
 
+```plaintext
 BookShopProject/ 
 ├── src/ 
 │ ├── controller/ # Servlets for handling requests   
@@ -29,24 +30,29 @@ BookShopProject/
 │ ├── home.html # Home page 
 ├── lib/ # External libraries (MySQL Connector)  
 └── README.md
+```
 
 
 ## ⚙️ Setup Instructions
 1. Clone the repository:  
    ```bash
    git clone https://github.com/your-repo-url.git
+   ```
    
 2. **Set up the MySQL database:**  
    - Import the provided SQL script.
 
 3. **Update database credentials:**  
-   Update database credentials in `utils/DBConnection.java`.
+   - Update database credentials in `utils/DBConnection.java`.
 
-4. **Deploy the project:**  
-   Deploy the project on Apache Tomcat.
+4. **Deploy the project:**
+   - Place the project in the webapps folder of Apache Tomcat.  
+   - Start the Tomcat Server.
 
-5. **Access the application:**  
+6. **Access the application:**
+   ```text  
    http://localhost:8080/BookShopApp
+   ```
 
 ## 📝 Database Schema
 
@@ -60,10 +66,22 @@ CREATE TABLE books (
 );
 ```
 
-## 🤝 Contributing
+## 🤝 **Contributing**
 
-Contributions are welcome! Feel free to open an issue or submit a pull request.
+Contributions are welcome! Please follow these steps:
 
-## 📄 License
+1. **Fork the repository.**
 
-This project is licensed under the **MIT License**.
+2. **Create a new branch:**  
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. **Commit your changes:**
+   ```bash
+   git commit -m "Add your feature"
+   ```
+4. **Push your branch:**
+   ```bash
+   git push origin feature/your-feature
+   ```
+5. **Create a pull request.**
