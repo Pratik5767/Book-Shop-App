@@ -25,6 +25,15 @@ public class EditScreenServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doProcess(req, res);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doProcess(req, res);
+	}
+
+	public void doProcess(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// Get PrintWriter
 		PrintWriter pw = res.getWriter();
 
@@ -49,20 +58,23 @@ public class EditScreenServlet extends HttpServlet {
 
 			if (resultSet != null) {
 				if (resultSet.next()) {
-					pw.println("<form action='editurl?id="+id+"' method='post'>");
+					pw.println("<form action='editurl?id=" + id + "' method='post'>");
 					pw.println("<table align='center'>");
 					pw.println("<tr>");
 					pw.println("<td>Book Name</td>");
 					pw.println("<td><input type='text' name='bookName' value='" + resultSet.getString(1) + "'></td>");
 					pw.println("</tr>");
+					
 					pw.println("<tr>");
 					pw.println("<td>Book Edition</td>");
 					pw.println("<td><input type='text' name='bookEdition' value='" + resultSet.getString(2) + "'></td>");
 					pw.println("</tr>");
+					
 					pw.println("<tr>");
 					pw.println("<td>Book Price</td>");
 					pw.println("<td><input type='text' name='bookPrice' value='" + resultSet.getFloat(3) + "'></td>");
 					pw.println("</tr>");
+					
 					pw.println("<tr>");
 					pw.println("<td><input type='submit' value='Edit'</td>");
 					pw.println("<td><input type='reset' value='Cancel'</td>");
@@ -88,10 +100,6 @@ public class EditScreenServlet extends HttpServlet {
 		pw.println("<a href='home.html'>Home</a>");
 		pw.println("<br/>");
 		pw.println("<a href='booklist'>Book List</a>");
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doGet(req, res);
+		pw.close();
 	}
 }

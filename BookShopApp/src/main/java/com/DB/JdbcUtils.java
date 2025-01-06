@@ -24,8 +24,7 @@ public class JdbcUtils {
 	}
 
 	public static Connection getConnection() throws SQLException, IOException {
-		FileInputStream fis = new FileInputStream(
-				"D:\\Pratik\\Servlet and JSP\\BookShopApp\\src\\main\\java\\com\\properties\\application.properties");
+		FileInputStream fis = new FileInputStream("D:\\Pratik\\git\\BookShopRepo\\BookShopApp\\src\\main\\java\\com\\properties\\applications.properties");
 		Properties properties = new Properties();
 		properties.load(fis);
 

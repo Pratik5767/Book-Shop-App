@@ -23,6 +23,15 @@ public class RegisterServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doProcess(req, res);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doProcess(req, res);
+	}
+
+	public void doProcess(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// Get PrintWriter
 		PrintWriter pw = res.getWriter();
 
@@ -70,11 +79,7 @@ public class RegisterServlet extends HttpServlet {
 		}
 		pw.println("<a center href='home.html'>Home</a>");
 		pw.println("<br/>");
-		pw.println("<a href='booklist'>Book List</a>");
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doGet(req, res);
+		pw.println("<a href='booklist' class='btn btn-primary btn-lg btn-block'>Book List</a>");
+		pw.close();
 	}
 }

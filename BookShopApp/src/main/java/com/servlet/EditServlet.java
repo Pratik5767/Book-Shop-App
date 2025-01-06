@@ -23,6 +23,15 @@ public class EditServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doProcess(req, res);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doProcess(req, res);
+	}
+
+	public void doProcess(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// Get PrintWriter
 		PrintWriter pw = res.getWriter();
 
@@ -75,10 +84,6 @@ public class EditServlet extends HttpServlet {
 		pw.println("<a href='home.html'>Home</a>");
 		pw.println("<br/>");
 		pw.println("<a href='booklist'>Book List</a>");
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doGet(req, res);
+		pw.close();
 	}
 }
