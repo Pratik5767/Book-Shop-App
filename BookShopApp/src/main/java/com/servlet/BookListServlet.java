@@ -17,6 +17,8 @@ import com.DB.JdbcUtils;
 
 @WebServlet("/booklist")
 public class BookListServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	private static final String sqlQuery = "SELECT `id`,`bookName`,`bookEdition`,`bookPrice` FROM book";
 
 	Connection connection = null;

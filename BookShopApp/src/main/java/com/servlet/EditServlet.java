@@ -16,6 +16,8 @@ import com.DB.JdbcUtils;
 
 @WebServlet("/editurl")
 public class EditServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
 	private static final String sqlQuery = "UPDATE book SET `bookName`=?,`bookEdition`=?,`bookPrice`=? WHERE id=?";
 
 	Connection connection = null;

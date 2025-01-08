@@ -16,6 +16,8 @@ import com.DB.JdbcUtils;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
 	private static final String sqlQuery = "INSERT INTO book(`bookName`, `bookEdition`,`bookPrice`)VALUE(?,?,?)";
 
 	Connection connection = null;

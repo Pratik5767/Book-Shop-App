@@ -17,6 +17,8 @@ import com.DB.JdbcUtils;
 
 @WebServlet("/editScreen")
 public class EditScreenServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
 	private static final String sqlQuery = "SELECT `bookName`,`bookEdition`,`bookPrice` FROM book WHERE id = ?";
 
 	Connection connection = null;

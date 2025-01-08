@@ -16,6 +16,8 @@ import com.DB.JdbcUtils;
 
 @WebServlet("/deleteUrl")
 public class DeleteServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
 	private static final String sqlQuery = "DELETE FROM book WHERE id=?";
 
 	Connection connection = null;
