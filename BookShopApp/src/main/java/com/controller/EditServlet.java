@@ -1,4 +1,4 @@
-package com.servlet;
+package com.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.DB.JdbcUtils;
 
-@WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/editurl")
+public class EditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private static final String sqlQuery = "INSERT INTO book(`bookName`, `bookEdition`,`bookPrice`)VALUE(?,?,?)";
+
+	private static final String sqlQuery = "UPDATE book SET `bookName`=?,`bookEdition`=?,`bookPrice`=? WHERE id=?";
 
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
@@ -40,7 +40,25 @@ public class RegisterServlet extends HttpServlet {
 		// set content Type
 		res.setContentType("text/html");
 
-		// get the book info
+		// Adding CSS
+		pw.println("<head>");
+		pw.println("<link rel='stylesheet' href='css/bootstrap.css'>");
+		pw.println("<style>");
+		pw.println("body { font-family: Arial, sans-serif; margin: 2rem; }");
+		pw.println("h2 { text-align: center; color: green; }");
+		pw.println("a { text-decoration: none; margin-top: 1rem; display: block; text-align: center; }");
+		pw.println("a.btn { padding: 10px 20px; border-radius: 5px; margin: 10px auto; display: inline-block; }");
+		pw.println("a.btn-primary { background-color: #007bff; color: white; }");
+		pw.println("a.btn-primary:hover { background-color: #0056b3; }");
+		pw.println("a.center { display: block; margin: 1rem auto; font-weight: bold; }");
+		pw.println("</style>");
+		pw.println("</head>");
+		pw.println("<body>");
+
+		// get the id of record
+		int id = Integer.parseInt(req.getParameter("id"));
+
+		// get the edited data we want to edit
 		String bookName = req.getParameter("bookName");
 		String bookEdition = req.getParameter("bookEdition");
 		float bookPrice = Float.parseFloat(req.getParameter("bookPrice"));
@@ -57,21 +75,22 @@ public class RegisterServlet extends HttpServlet {
 				preparedStatement.setString(1, bookName);
 				preparedStatement.setString(2, bookEdition);
 				preparedStatement.setFloat(3, bookPrice);
+				preparedStatement.setInt(4, id);
 			}
 
 			int count = preparedStatement.executeUpdate();
 			if (count == 1) {
-				pw.println("<h2>Record is Registered Successfully</h2>");
+				pw.println("<h2>Record is Edited Successfully</h2>");
 			} else {
-				pw.println("<h2>No Record Registered</h2>");
+				pw.println("<h2>No Record Edited</h2>");
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			pw.println("<h2>" + e.getMessage() + "</h2>");
+			pw.println("<h2 class='text-danger'>" + e.getMessage() + "</h2>");
 		} catch (Exception e) {
 			e.printStackTrace();
-			pw.println("<h1>" + e.getMessage() + "</h1>");
+			pw.println("<h1 class='text-danger'>" + e.getMessage() + "</h1>");
 		} finally {
 			try {
 				JdbcUtils.clearConnections(connection, preparedStatement, null);
@@ -79,9 +98,9 @@ public class RegisterServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		pw.println("<a center href='home.html'>Home</a>");
-		pw.println("<br/>");
-		pw.println("<a href='booklist' class='btn btn-primary btn-lg btn-block'>Book List</a>");
+		pw.println("<a href='home.html' class='btn btn-success center'>Home</a>");
+        pw.println("<a href='booklist' class='btn btn-primary center'>View Book List</a>");
+		pw.println("</body>");
 		pw.close();
 	}
 }

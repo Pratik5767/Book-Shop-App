@@ -1,4 +1,4 @@
-package com.servlet;
+package com.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,12 +26,12 @@ public class BookListServlet extends HttpServlet {
 	ResultSet resultSet = null;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doProcess(req, res);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doProcess(req, res);
 	}
 
@@ -42,6 +42,17 @@ public class BookListServlet extends HttpServlet {
 		// set content Type
 		res.setContentType("text/html");
 
+		// adding bootstrap
+		pw.println("<link rel='stylesheet' href='css/bootstrap.css'>");
+        pw.println("<style>");
+        pw.println("table { margin-top: 2rem; }");
+        pw.println(".btn-action { margin: 0 5px; }");
+        pw.println(".container { margin-top: 2rem; }");
+        pw.println("</style>");
+        pw.println("<body>");
+        pw.println("<div class='container'>");
+        pw.println("<h1 class='text-center text-primary'>Book List</h1>");
+        
 		// Load JDBC Driver
 		try {
 			connection = JdbcUtils.getConnection();
@@ -55,7 +66,8 @@ public class BookListServlet extends HttpServlet {
 			}
 
 			if (resultSet != null) {
-				pw.println("<table border='1' align='center'>");
+				pw.println("<table class='table table-bordered table-striped table-hover text-center'>");
+				pw.println("<thead class='table-dark'>");
 				pw.println("<tr>");
 				pw.println("<th>Book Id</th>");
 				pw.println("<th>Book Name</th>");
@@ -64,25 +76,28 @@ public class BookListServlet extends HttpServlet {
 				pw.println("<th>Edit</th>");
 				pw.println("<th>Delete</th>");
 				pw.println("</tr>");
+				pw.println("</thead>");
+				pw.println("<tbody>");
 				while (resultSet.next()) {
 					pw.println("<tr>");
 					pw.println("<td>" + resultSet.getInt(1) + "</td>");
 					pw.println("<td>" + resultSet.getString(2) + "</td>");
 					pw.println("<td>" + resultSet.getString(3) + "</td>");
 					pw.println("<td>" + resultSet.getFloat(4) + "</td>");
-					pw.println("<td><a href='editScreen?id=" + resultSet.getInt(1) + "'>Edit</a></td>");
-					pw.println("<td><a href='deleteUrl?id=" + resultSet.getInt(1) + "'>Delete</a></td>");
+					pw.println("<td><a href='editScreen?id=" + resultSet.getInt(1) + "' class='btn btn-warning btn-sm btn-action'>Edit</a></td>");
+					pw.println("<td><a href='deleteUrl?id=" + resultSet.getInt(1) + "' class='btn btn-danger btn-sm btn-action'>Delete</a></td>");
 					pw.println("</tr>");
 				}
+				pw.println("</tbody>");
 				pw.println("</table>");
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			pw.println("<h2>" + e.getMessage() + "</h2>");
+			pw.println("<h2 class='text-danger'>" + e.getMessage() + "</h2>");
 		} catch (Exception e) {
 			e.printStackTrace();
-			pw.println("<h1>" + e.getMessage() + "</h1>");
+			pw.println("<h1 class='text-danger'>" + e.getMessage() + "</h1>");
 		} finally {
 			try {
 				JdbcUtils.clearConnections(connection, preparedStatement, resultSet);
@@ -90,7 +105,11 @@ public class BookListServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		pw.println("<a href='home.html'>Home</a>");
+		pw.println("<div class='text-center mt-4'>");
+        pw.println("<a href='home.html' class='btn btn-primary'>Home</a>");
+        pw.println("</div>");
+        pw.println("</div>");
+        pw.println("</body>");
 		pw.close();
 	}
 }
